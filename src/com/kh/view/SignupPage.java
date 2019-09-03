@@ -12,7 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import com.kh.controller.UserManager;
+
 import com.kh.model.dao.MenteeDao;
 import com.kh.model.dao.MentorDao;
 import com.kh.model.vo.Mentee;
@@ -24,7 +24,7 @@ public class SignupPage extends JPanel {
 	private MainFrame mf;
 	private JPanel SignupPage;
 	private JPanel LoginPage;
-	private UserManager um;
+
 
 	private MenteeDao menteeDao;
 	private MentorDao mentorDao;
@@ -47,21 +47,33 @@ public class SignupPage extends JPanel {
 	JLabel lblNewLabel_5;
 
 	private JButton SignupOk;
-	
+
 	private String strMentorPwCheck;
 	private String strMentorPw;
-	
+
 	private String strMenteePwCheck;
 	private String strMenteePw;
-	
+
 	private Mentee mmentee;
 	private Mentor mmentor;
+
+	private String menteeid;
+	private String mentorid;
+
+	private ArrayList<Mentee> list;
+	private ArrayList<Mentor> list2;
 
 	public SignupPage(MainFrame mf) {
 		this.mf = mf;
 		SignupPage = this;
-		this.mmentee=new Mentee();
-		this.mmentor=new Mentor();
+
+		mmentee = new Mentee();
+		list = new ArrayList<Mentee>();
+		menteeDao = new MenteeDao();
+		
+		mmentor = new Mentor();
+		list2 = new ArrayList<Mentor>();
+		mentorDao = new MentorDao();
 
 		this.setBounds(0, 0, 1150, 700);
 		this.setLayout(null);
@@ -175,92 +187,88 @@ public class SignupPage extends JPanel {
 
 	}
 
-	public  Mentee  inputMentee() {
+//	public  Mentee  inputMentee() {
+//
+//		
+//
+//		String menteeid = idField.getText();
+//		mmentee.setId(menteeid);
+//
+//		char[] menteepw = pwField.getPassword();
+//		
+//		
+//		
+//		for(int i = 0; i < menteepw.length; i++) {
+//			strMenteePw = String.valueOf(menteepw[i]);
+//		}
+//		mmentee.setPw(strMenteePw);
+//		
+//	
+//
+//		char[] menteepwCheck = pwField2.getPassword();
+//		for(int i = 0; i < menteepw.length; i++) {
+//			strMenteePwCheck = String.valueOf(menteepwCheck[i]);
+//		}
+//		
+//		mmentee.setPwCheck(strMenteePwCheck);
+//
+//		String Name = nameField.getText();
+//		mmentee.setName(Name);
+//
+//		String Email = emailField.getText();
+//		mmentee.setEmail(Email);
+//
+//		mmentee.setMentor_or_Mentee("Mentee");
+//
+//		mmentee.setJob(null);
+//		mmentee.setField_Mentee(null); //////////////////// UI 추가하면 도전
+//
+//		
+//		
+//		
+//		
+//		return mmentee;
+//		
+//		
+//	}
 
-		Mentee mentee = new Mentee();
-
-		String menteeid = idField.getText();
-		mentee.setId(menteeid);
-
-		char[] menteepw = pwField.getPassword();
-		
-		
-		
-		for(int i = 0; i < menteepw.length; i++) {
-			strMenteePw = String.valueOf(menteepw[i]);
-		}
-		mentee.setPw(strMenteePw);
-		
-	
-
-		char[] menteepwCheck = pwField2.getPassword();
-		for(int i = 0; i < menteepw.length; i++) {
-			strMenteePwCheck = String.valueOf(menteepwCheck[i]);
-		}
-		
-		mentee.setPwCheck(strMenteePwCheck);
-
-		String Name = nameField.getText();
-		mentee.setName(Name);
-
-		String Email = emailField.getText();
-		mentee.setEmail(Email);
-
-		mentee.setMentor_or_Mentee("Mentee");
-
-		mentee.setJob(null);
-		mentee.setField_Mentee(null); //////////////////// UI 추가하면 도전
-
-		
-		
-		
-		
-		return mentee;
-		
-		
-	}
-
-	public Mentor inputMentor() {
-
-		Mentor mentor = new Mentor();
-
-		String mentorid = idField.getText();
-		mentor.setId(mentorid);
-
-		char[] mentorpw = pwField.getPassword();
-		
-		
-		
-		for(int i = 0; i < mentorpw.length; i++) {
-			strMentorPw = String.valueOf(mentorpw[i]);
-		}
-		mentor.setPw(strMentorPw);
-		
-		
-
-		char[] mentorpwCheck = pwField2.getPassword();
-		for(int i = 0; i < mentorpw.length; i++) {
-			strMentorPwCheck = String.valueOf(mentorpwCheck[i]);
-		}
-		
-		mentor.setPwCheck(strMentorPwCheck);
-
-		String Name = nameField.getText();
-		mentor.setName(Name);
-
-		String Email = emailField.getText();
-		mentor.setEmail(Email);
-
-		mentor.setMentor_or_Mentee("Mentor");
-
-		mentor.setSchoolName(null);/////////////////////////////
-		mentor.setCompanyName(null);
-
-		mentor.setWorkingYear(0);
-		mentor.setField_Mentoring(null);
-
-		return mentor;
-	}
+//	public Mentor inputMentor() {
+//
+//		Mentor mentor = new Mentor();
+//
+//		String mentorid = idField.getText();
+//		mentor.setId(mentorid);
+//
+//		char[] mentorpw = pwField.getPassword();
+//
+//		for (int i = 0; i < mentorpw.length; i++) {
+//			strMentorPw = String.valueOf(mentorpw[i]);
+//		}
+//		mentor.setPw(strMentorPw);
+//
+//		char[] mentorpwCheck = pwField2.getPassword();
+//		for (int i = 0; i < mentorpw.length; i++) {
+//			strMentorPwCheck = String.valueOf(mentorpwCheck[i]);
+//		}
+//
+//		mentor.setPwCheck(strMentorPwCheck);
+//
+//		String Name = nameField.getText();
+//		mentor.setName(Name);
+//
+//		String Email = emailField.getText();
+//		mentor.setEmail(Email);
+//
+//		mentor.setMentor_or_Mentee("Mentor");
+//
+//		mentor.setSchoolName(null);/////////////////////////////
+//		mentor.setCompanyName(null);
+//
+//		mentor.setWorkingYear(0);
+//		mentor.setField_Mentoring(null);
+//
+//		return mentor;
+//	}
 
 	class MyEvent1 implements ActionListener {
 
@@ -268,23 +276,109 @@ public class SignupPage extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 
 			if (mentee.isSelected()) {
+
+				menteeid = idField.getText();
+				mmentee.setId(menteeid);
+
+				char[] menteepw = pwField.getPassword();
+
+				for (int i = 0; i < menteepw.length; i++) {
+					strMenteePw = String.valueOf(menteepw[i]);
+				}
+				mmentee.setPw(strMenteePw);
+
+				char[] menteepwCheck = pwField2.getPassword();
+				for (int i = 0; i < menteepw.length; i++) {
+					strMenteePwCheck = String.valueOf(menteepwCheck[i]);
+				}
+
+				mmentee.setPwCheck(strMenteePwCheck);
+
+				String Name = nameField.getText();
+				mmentee.setName(Name);
+
+				String Email = emailField.getText();
+				mmentee.setEmail(Email);
+
+				mmentee.setMentor_or_Mentee("Mentee");
+
+				mmentee.setJob(null);
+				mmentee.setField_Mentee(null); //////////////////// UI 추가하면 도전
+
+				list = menteeDao.FileOpen();
+				if (list == null) {
+					list = new ArrayList<Mentee>();
+				}
+				list.add(mmentee);
+				menteeDao.fileSave(list);
 				
-				
-				
-				um.insertMentee(inputMentee());
-				
-				
+				System.out.println(list);
+
 				ChangePanel.changePanel(mf, SignupPage, new LoginPage(mf));
-				
 
 			} else if (mentor.isSelected()) {
-
 				
+				
+				
+				
+				
+				String mentorid = idField.getText();
+				mmentor.setId(mentorid);
+
+				char[] mentorpw = pwField.getPassword();
+
+				for (int i = 0; i < mentorpw.length; i++) {
+					strMentorPw = String.valueOf(mentorpw[i]);
+				}
+				mmentor.setPw(strMentorPw);
+
+				char[] mentorpwCheck = pwField2.getPassword();
+				for (int i = 0; i < mentorpw.length; i++) {
+					strMentorPwCheck = String.valueOf(mentorpwCheck[i]);
+				}
+
+				mmentor.setPwCheck(strMentorPwCheck);
+
+				String Name = nameField.getText();
+				mmentor.setName(Name);
+
+				String Email = emailField.getText();
+				mmentor.setEmail(Email);
+
+				mmentor.setMentor_or_Mentee("Mentor");
+
+				mmentor.setSchoolName(null);/////////////////////////////
+				mmentor.setCompanyName(null);
+
+				mmentor.setWorkingYear(0);
+				mmentor.setField_Mentoring(null);
+				
+				
+				
+				list2 = mentorDao.FileOpen();
+				if (list2 == null) {
+					list2 = new ArrayList<Mentor>();
+				}
+				list2.add(mmentor);
+				mentorDao.fileSave(list2);
+				
+				System.out.println(list2);
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
 				ChangePanel.changePanel(mf, SignupPage, new LoginPage(mf));
-				um.insertMentor(inputMentor());
+
 			}
 
-			
 		}
 
 	}
@@ -325,7 +419,5 @@ public class SignupPage extends JPanel {
 		}
 
 	}
-
-
 
 }

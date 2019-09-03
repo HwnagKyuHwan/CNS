@@ -1,5 +1,6 @@
 package com.kh.model.dao;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -76,6 +77,8 @@ public ArrayList<Mentor> FileOpen() {
 	} catch (FileNotFoundException e) {
 		System.out.println("파일이 없습니다.");
 		
+	} catch (EOFException e) {
+		// TODO: handle exception
 	} catch (IOException e) {
 		
 		e.printStackTrace();

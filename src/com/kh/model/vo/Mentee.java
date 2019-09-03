@@ -10,10 +10,12 @@ public class Mentee extends User implements java.io.Serializable{
 	
 	
 	
+	
+
+
 	@Override
 	public String toString() {
-
-		return "Mentee [job=" + 	super.toString() + "," +job + ", field_Mentee=" + field_Mentee + "]";
+		return super.toString() + "Mentee [ job=" + job + ", field_Mentee=" + field_Mentee + "]";
 	}
 
 

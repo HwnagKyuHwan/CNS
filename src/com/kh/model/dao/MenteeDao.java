@@ -1,5 +1,6 @@
 package com.kh.model.dao;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -37,7 +38,7 @@ public class MenteeDao {
 		  
 		  
 		  oos = new ObjectOutputStream(new FileOutputStream("MenteeFile.txt",true));
-		  System.out.println("멘티");
+		
 		  
 		  oos.writeObject(list);
 		  
@@ -81,7 +82,10 @@ public class MenteeDao {
 		} catch (FileNotFoundException e) {
 			System.out.println("파일이 없습니다.");
 
-		} catch (IOException e) {
+		}catch (EOFException e) {
+			// TODO: handle exception
+		} 
+		catch (IOException e) {
 
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

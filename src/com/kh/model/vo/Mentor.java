@@ -10,10 +10,11 @@ public class Mentor extends User implements java.io.Serializable{
 	private int WorkingYear;
 	private String field_Mentoring;
 	
+
+
 	@Override
 	public String toString() {
-		
-		return "Mentor [super.toString() + SchoolName=" + SchoolName + ", CompanyName=" + CompanyName + ", WorkingYear=" + WorkingYear
+		return super.toString() + "Mentor [SchoolName=" + SchoolName + ", CompanyName=" + CompanyName + ", WorkingYear=" + WorkingYear
 				+ ", field_Mentoring=" + field_Mentoring + "]";
 	}
 
